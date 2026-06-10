@@ -1,6 +1,6 @@
 # Model Rocket Stereoscopic Tracker
 
-This Python application analyzes two 60 FPS smartphone videos of a model rocket launch, tracks the fluorescent orange nose cone using HSV color detection, synchronizes the footage, and estimates altitude, velocity, and acceleration using stereoscopic triangulation.
+This Python application analyzes two 60 FPS smartphone videos of a model rocket launch, tracks a user-specified color (like a bright nose cone or fins) using customizable HSV thresholding, synchronizes the footage, and estimates altitude, velocity, and acceleration using stereoscopic triangulation.
 
 ## Requirements
 
@@ -12,20 +12,23 @@ pip install opencv-python numpy matplotlib pandas scipy
 
 1. **Prepare your videos:** - Place cameras on tripods separated by a known baseline distance (e.g., 10 meters).
    - Aim both cameras at the launch pad. Keep them as parallel as possible.
-   - Record at 60 FPS. 
-   - Save the files as `video_a.mp4` and `video_b.mp4` in the same directory as the script.
-2. **Measure your baseline:** Note the exact distance between the two camera tripods in meters.
-3. **HSV Tuning:** The script defaults to tracking fluorescent orange. If your lighting is different, you may need to adjust the `HSV_LOWER` and `HSV_UPPER` values in the script. You can use an online HSV color picker to find the right range for your specific nose cone.
+   - Record at 60 FPS and save as `video_a.mp4` and `video_b.mp4` in the script's directory.
+2. **Choose Your Tracking Color:**
+   - **Crucial Tip:** This tracker works best if the rocket features a **bright, high-contrast color** (like fluorescent orange, neon green, or bright pink) that stands out sharply against the blue sky, clouds, or ground vegetation.
+   - Find the HSV (Hue, Saturation, Value) range for your rocket's color. You can use an online image color picker or an HSV color mapping tool.
+3. **Configure the Script:**
+   - Open `rocket_tracker.py` and scroll to the `--- CONFIGURATION ---` block at the bottom.
+   - Input your camera baseline distance and your custom `HSV_LOWER` and `HSV_UPPER` boundary arrays.
 
 ## How to Run
 
 1. Open your terminal or command prompt.
-2. Navigate to the folder containing the script and videos. ( cd function on cmd windows)
+2. Navigate to the folder containing the script and videos.
 3. Run the script: `python rocket_tracker.py`
-4. The script will process both videos (which may take a few minutes depending on your CPU), display tracking overlays (press 'q' to skip visual debugging), and generate your CSV and PNG outputs.
+4. Press 'q' on the video pop-ups if you want to skip visual debugging.
 
 ## Outputs
 
 - `tracked_positions.csv`: Raw X/Y pixel coordinates for both cameras.
 - `flight_data.csv`: Time, Altitude, Velocity, and Acceleration data.
-- `flight_graphs.png`: Plots of the rocket's kinematics.
+- `flight_graphs.png`: High-resolution plots of the rocket's kinematics.
