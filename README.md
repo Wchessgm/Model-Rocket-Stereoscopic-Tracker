@@ -20,7 +20,7 @@ pip install opencv-python numpy matplotlib pandas scipy
 ## How to Run
 
 1. Open your terminal or command prompt.
-2. Navigate to the folder containing the script and videos.
+2. Navigate to the folder containing the script and videos. ( cd function on cmd windows)
 3. Run the script: `python rocket_tracker.py`
 4. The script will process both videos (which may take a few minutes depending on your CPU), display tracking overlays (press 'q' to skip visual debugging), and generate your CSV and PNG outputs.
 
